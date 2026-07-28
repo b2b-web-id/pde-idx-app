@@ -1,133 +1,140 @@
 # PDE @ IDX
 
-Aplikasi Yii 2 Basic untuk mengelola data pelaku usaha berdasarkan data IDX (Bursa Efek Indonesia).
+Aplikasi Yii2 untuk mengelola data individu, perusahaan, dan hubungan kepengurusan berdasarkan data IDX (Bursa Efek Indonesia).
 
-## Versi & Teknologi
+## Status Saat Ini
 
-| Komponen | Versi Terinstal |
-|----------|----------------|
-| **Yii2 Framework** | 2.0.38 |
-| **PHP** | 8.4.x (runtime) — minimal 7.4 (composer) |
-| **MySQL/MariaDB** | 11.x (MariaDB CLI) |
-| **Composer** | Lihat `composer.lock` untuk versi binary |
+Fitur yang tersedia:
 
-### Dependency utama
+- CRUD dan pencarian data `Individu`.
+- CRUD dan pencarian data `Perusahaan`.
+- Relasi `Individu` <-> `Perusahaan`, termasuk jabatan, status, periode, dan penanda komisaris independen.
+- Referensi sektor, KBLI, klasifikasi IDX, dan biro administrasi efek.
+- Login berbasis database, registrasi user, bcrypt password hashing, dan role `admin`/`user`.
+- Akses CRUD relasi dan data utama dibatasi untuk administrator.
+- CSRF protection, security response headers, dan pembatasan percobaan login berbasis session.
 
-| Paket | Versi |
-|-------|-------|
-| `yiisoft/yii2` | 2.0.38 |
-| `yiisoft/yii2-bootstrap` | 2.0.11 |
-| `yiisoft/yii2-swiftmailer` | 2.1.2 |
-| `yiisoft/yii2-debug` | 2.1.x (dev) |
-| `yiisoft/yii2-gii` | 2.1.x (dev) |
-| `yiisoft/yii2-faker` | 2.0.x (dev) |
-| `codeception/codeception` | 4.1.22 |
-| `swiftmailer/swiftmailer` | v6.3.0 |
-| `symfony/browser-kit` | >=2.7 |
-| `fakerphp/faker` | v1.16.0 |
-| `egulias/email-validator` | 3.1.2 |
+## Teknologi
 
-Daftar lengkap tersedia di `composer.lock`.
+| Komponen | Versi / Catatan |
+|---|---|
+| PHP | 8.4.x pada lingkungan pengembangan saat ini |
+| Yii2 | 2.0.38 |
+| Database | MySQL atau MariaDB |
+| Dependency manager | Composer |
+| Testing | Codeception 4.1.22 |
+| Web server | Apache/Nginx atau PHP built-in server |
 
-## REQUIREMENTS
+Versi dependency lengkap dikunci di `composer.lock`.
 
-- PHP **>= 7.4**
-- MySQL/MariaDB
-- Apache dengan `mod_rewrite` aktif (atau Nginx dengan `try_files`)
-- Composer
+## Persyaratan
 
-## Instalasi Cepat
+- PHP yang memenuhi constraint pada `composer.json`.
+- Extension PHP yang dibutuhkan Yii2 dan driver `pdo_mysql`.
+- MySQL/MariaDB.
+- Composer.
+
+## Instalasi Lokal
 
 ```bash
-# 1. Clone repo
 git clone https://github.com/b2b-web-id/pde-idx-app.git
 cd pde-idx-app
-
-# 2. Install dependency
 composer install
 
-# 3. Salin dan konfigurasi db.php
-cp config/db.php config/db.local.php
-# Edit config/db.local.php dengan kredensial database Anda
-# (config/db.php diabaikan oleh .gitignore untuk alasan keamanan)
+mysql -u root -e "CREATE DATABASE pde;"
 
-# 4. Set environment variabel database (opsional, mengganti hardcoded password di db.php)
-export DB_PASSWORD="your_db_password"
+export DB_DSN='mysql:host=localhost;dbname=pde'
+export DB_USERNAME='root'
+export DB_PASSWORD=''
 
-# 5. Akses aplikasi via web server dengan document root ke /web
-# atau gunakan built-in PHP server:
-php yii serve
-
-# 6. Login
-# Bawaan: admin/admin atau demo/demo
+php yii migrate --interactive=0
+php yii seed
+php -S localhost:8000 -t web
 ```
 
-### Docker / Docker Compose (development)
+Buka `http://localhost:8000`. `config/db.php` membaca `DB_DSN`, `DB_USERNAME`, dan `DB_PASSWORD` dari environment variable, dengan fallback untuk development lokal. File `.env` diabaikan, tetapi aplikasi tidak memuat `.env` secara otomatis; gunakan shell, process manager, atau library dotenv untuk memasukkan nilainya.
+
+Dependency dan runtime tidak disimpan di Git. Jika `vendor/autoload.php` belum tersedia, jalankan `composer install` kembali.
+
+### Akun Development
+
+`php yii seed` membuat akun berikut jika belum ada:
+
+| Username | Password | Role |
+|---|---|---|
+| `admin` | `admin` | `admin` |
+| `demo` | `demo` | `user` |
+
+Ganti password dan hapus akun default sebelum deployment.
+
+## Database dan Migration
+
+Migration membuat atau memperluas tabel berikut:
+
+- `user` dan `login_attempts`.
+- `individu`, `perusahaan`, dan `individu_perusahaan`.
+- `sektor`, `kbli`, dan `idx_klasifikasi`.
+- `biro_admin_efek` serta kolom referensi IDX pada `perusahaan`.
+
+Perintah yang umum digunakan:
 
 ```bash
-docker-compose up -d
-# Akses http://localhost:8000
+php yii migrate
+php yii migrate/history
+php yii migrate/redo 1
 ```
 
-### Vagrant
-
-```bash
-vagrant up
-# Akses http://yii2basic.test
-# (catatan: Vagrantfile memerlukan GitHub token di vagrant/config/vagrant-local.yml)
-```
+> Pastikan backup database tersedia sebelum menjalankan migration pada lingkungan bersama atau production.
 
 ## Struktur Proyek
 
+```text
+commands/                 Console commands, termasuk seed user
+config/                   Konfigurasi web, console, database, dan parameter
+controllers/              Controller site, individu, perusahaan, dan relasi
+migrations/               Schema dan seed data referensi IDX
+models/                   ActiveRecord, search model, dan form model
+views/                    Template halaman dan form
+web/                      Document root dan entry point aplikasi
+tests/                    Unit, functional, dan acceptance tests
+docs/                     Dokumentasi arsitektur dan roadmap
+runtime/                  Log/cache lokal, diabaikan Git
+vendor/                   Dependency Composer, diabaikan Git
 ```
-├── commands/         Console commands
-├── config/           Application config (web, console, db, params)
-├── controllers/      Web controllers (Individu, Perusahaan, Site)
-├── models/           AR models (Individu, Perusahaan, User, LoginForm, ContactForm)
-├── views/            PHP view templates (individu, perusahaan, site, layouts)
-├── web/              Web root (index.php, assets, css, .htaccess)
-├── mail/             Email templates
-├── tests/            Codeception acceptance/functional/unit tests
-├── runtime/          Logs, debug data (gitignored)
-├── vendor/           Composer dependencies
-├── docker-compose.yml  Docker development setup
-├── Vagrantfile       Vagrant development setup
-└── yii               Console entry script
-```
-
-## Database
-
-Edit `config/db.php` dengan kredensial database asli. Karena file ini di-.gitignore, buat salinan lokal:
-
-```php
-return [
-    'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=pde_idx',
-    'username' => 'root',
-    'password' => getenv('DB_PASSWORD') ?: '',
-    'charset' => 'utf8',
-];
-```
-
-Tabel yang dibutuhkan: `individu` dan `perusahaan` — skema sesuai dengan `models/Individu.php` dan `models/Perusahaan.php`.
 
 ## Testing
 
 ```bash
-# Jalankan unit tests
-vendor/bin/codeception run unit
-
-# Jalankan functional tests
-vendor/bin/codeception run functional
-
-# Jalankan acceptance tests (membutuhkan browser driver aktif)
-vendor/bin/codeception run acceptance
+vendor/bin/codecept run unit
+vendor/bin/codecept run functional
+vendor/bin/codecept run acceptance
 ```
+
+Acceptance test membutuhkan browser driver dan aplikasi yang sedang berjalan. Test database harus menggunakan konfigurasi database test yang terpisah.
 
 ## Keamanan
 
-- `web/index.php`: **YII_DEBUG dinonaktifkan secara bawaan** (false) untuk produksi
-- Password pengguna di `models/User.php` disimpan dalam **bcrypt hash** (bukan plaintext)
-- Modul debug & Gii dibatasi hanya ke `127.0.0.1` dan `::1`
-- Cookie validation key ada di `config/web.php` — ganti dengan nilai unik/secure di produksi
-- Database password dibaca dari environment variabel `DB_PASSWORD` dengan fallback kosong (untuk development lokal)
+- `web/index.php` default ke `YII_DEBUG=false` dan `YII_ENV=prod`.
+- Password disimpan sebagai hash melalui `Yii::$app->security`.
+- CSRF validation aktif di web application.
+- CRUD dibatasi dengan `AccessControl`; operasi administrasi memerlukan role `admin`.
+- Debug dan Gii, jika diaktifkan pada environment development, dibatasi ke localhost.
+- Cookie validation key dapat diisi melalui `COOKIE_VALIDATION_KEY`.
+- Security headers ditambahkan pada response non-debug.
+
+Sebelum production, wajib mengganti credential default, menyediakan cookie key yang kuat, menggunakan HTTPS, membatasi database user, dan meninjau CSP serta logging.
+
+## Roadmap Fase Berikutnya
+
+Prioritas yang disarankan ada di [`docs/roadmap.md`](docs/roadmap.md). Urutan terdekat:
+
+1. Stabilkan schema dan coverage test untuk migration, autentikasi, dan CRUD relasi.
+2. Ganti role sederhana dengan RBAC Yii2 dan alur approval perubahan data.
+3. Bangun pipeline import/validasi data IDX dengan histori dan idempotensi.
+4. Tingkatkan pencarian, filter, export, dan audit trail untuk workflow operasional.
+5. Siapkan observability, backup, deployment, dan hardening production.
+
+## Dokumentasi Lanjutan
+
+- [Arsitektur](docs/architecture.md)
+- [Roadmap fase berikutnya](docs/roadmap.md)
