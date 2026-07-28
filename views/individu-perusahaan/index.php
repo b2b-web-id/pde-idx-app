@@ -75,9 +75,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'boolean',
                 'filter' => [0 => 'Tidak', 1 => 'Ya'],
             ],
-            'STATUS',
-            'TANGGAL_MULAI:date',
-            'TANGGAL_AKHIR:date',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

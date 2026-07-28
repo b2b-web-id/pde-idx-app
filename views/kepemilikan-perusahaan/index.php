@@ -36,7 +36,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function ($model) { return $model->perusahaan ? $model->perusahaan->NAMA : '-'; },
             ],
             'persentase_kepemilikan:decimal',
-            'persentase_hak_suara:decimal',
             [
                 'attribute' => 'jenis_kepemilikan',
                 'filter' => KepemilikanPerusahaan::getJenisKepemilikanOptions(),
