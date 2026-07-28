@@ -7,7 +7,7 @@ use yii\db\Migration;
  */
 class m250728_000000_create_user_table extends Migration
 {
-    public function safeUp()
+    public function up()
     {
         $this->createTable('{{%user}}', [
             'id' => $this->primaryKey(),
@@ -20,23 +20,26 @@ class m250728_000000_create_user_table extends Migration
         ]);
 
         // Seed default users (passwords: admin/admin, demo/demo)
+        // Auth keys are static for dev; generate new ones in production.
         $this->insert('{{%user}}', [
             'username' => 'admin',
-            'password_hash' => Yii::$app->security->generatePasswordHash('admin'),
-            'auth_key' => Yii::$app->security->generateRandomString(),
-            'access_token' => Yii::$app->security->generateRandomString(),
+            'password_hash' => '$2y$12$xhSbVDCVH75F8YnaKNdRCeNxIJp2zPLR8ZgU5tsye3VwAfi80Rc9G',
+            'auth_key' => 'test100key',
+            'access_token' => '100-token',
         ]);
-
         $this->insert('{{%user}}', [
             'username' => 'demo',
-            'password_hash' => Yii::$app->security->generatePasswordHash('demo'),
-            'auth_key' => Yii::$app->security->generateRandomString(),
-            'access_token' => Yii::$app->security->generateRandomString(),
+            'password_hash' => '$2y$12$BZmZ/QiZBCnrI/KnUXjkAuXU8zg/otJWDTeLbNaau5s3yPFTXKWYS',
+            'auth_key' => 'test101key',
+            'access_token' => '101-token',
         ]);
+
+        return true;
     }
 
-    public function safeDown()
+    public function down()
     {
         $this->dropTable('{{%user}}');
+        return true;
     }
 }

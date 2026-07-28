@@ -41,7 +41,6 @@ use function strncmp;
 use function strpos;
 use function trait_exists;
 use function version_compare;
-use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\CodeCoverageException;
 use PHPUnit\Framework\InvalidCoversTargetException;
 use PHPUnit\Framework\SelfDescribing;
@@ -54,6 +53,7 @@ use ReflectionException;
 use ReflectionFunction;
 use ReflectionMethod;
 use SebastianBergmann\Environment\OperatingSystem;
+use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
  * @internal This class is not covered by the backward compatibility promise for PHPUnit
@@ -86,7 +86,7 @@ final class Test
     private static $hookMethods = [];
 
     /**
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public static function describe(\PHPUnit\Framework\Test $test): array
     {
@@ -111,10 +111,11 @@ final class Test
     }
 
     /**
+     * @psalm-param class-string $className
+     *
      * @throws CodeCoverageException
      *
      * @return array|bool
-     * @psalm-param class-string $className
      */
     public static function getLinesToBeCovered(string $className, string $methodName)
     {
@@ -133,8 +134,9 @@ final class Test
     /**
      * Returns lines of code specified with the @uses annotation.
      *
-     * @throws CodeCoverageException
      * @psalm-param class-string $className
+     *
+     * @throws CodeCoverageException
      */
     public static function getLinesToBeUsed(string $className, string $methodName): array
     {
@@ -169,8 +171,9 @@ final class Test
     }
 
     /**
-     * @throws Exception
      * @psalm-param class-string $className
+     *
+     * @throws Exception
      */
     public static function getRequirements(string $className, string $methodName): array
     {
@@ -183,9 +186,10 @@ final class Test
     /**
      * Returns the missing requirements for a test.
      *
+     * @psalm-param class-string $className
+     *
      * @throws Exception
      * @throws Warning
-     * @psalm-param class-string $className
      */
     public static function getMissingRequirements(string $className, string $methodName): array
     {
@@ -312,11 +316,13 @@ final class Test
     /**
      * Returns the expected exception for a test.
      *
-     * @return array|false
-     *
      * @deprecated
+     *
      * @codeCoverageIgnore
+     *
      * @psalm-param class-string $className
+     *
+     * @return array|false
      */
     public static function getExpectedException(string $className, string $methodName)
     {
@@ -326,8 +332,9 @@ final class Test
     /**
      * Returns the provided data for a method.
      *
-     * @throws Exception
      * @psalm-param class-string $className
+     *
+     * @throws Exception
      */
     public static function getProvidedData(string $className, string $methodName): ?array
     {
@@ -511,15 +518,7 @@ final class Test
             self::$hookMethods[$className] = self::emptyHookMethodsArray();
 
             try {
-                foreach ((new ReflectionClass($className))->getMethods() as $method) {
-                    if ($method->getDeclaringClass()->getName() === Assert::class) {
-                        continue;
-                    }
-
-                    if ($method->getDeclaringClass()->getName() === TestCase::class) {
-                        continue;
-                    }
-
+                foreach ((new Reflection)->methodsInTestClass(new ReflectionClass($className)) as $method) {
                     $docBlock = Registry::getInstance()->forMethod($className, $method->getName());
 
                     if ($method->isStatic()) {
@@ -569,13 +568,14 @@ final class Test
                 $method->getDeclaringClass()->getName(),
                 $method->getName()
             )
-            ->symbolAnnotations()
+                ->symbolAnnotations()
         );
     }
 
     /**
-     * @throws CodeCoverageException
      * @psalm-param class-string $className
+     *
+     * @throws CodeCoverageException
      */
     private static function getLinesToBeCoveredOrUsed(string $className, string $methodName, string $mode): array
     {
@@ -687,7 +687,7 @@ final class Test
             } catch (ReflectionException $e) {
                 throw new Exception(
                     $e->getMessage(),
-                    (int) $e->getCode(),
+                    $e->getCode(),
                     $e
                 );
             }
@@ -717,7 +717,7 @@ final class Test
                     } catch (ReflectionException $e) {
                         throw new Exception(
                             $e->getMessage(),
-                            (int) $e->getCode(),
+                            $e->getCode(),
                             $e
                         );
                     }
@@ -753,7 +753,7 @@ final class Test
                         } catch (ReflectionException $e) {
                             throw new Exception(
                                 $e->getMessage(),
-                                (int) $e->getCode(),
+                                $e->getCode(),
                                 $e
                             );
                         }
@@ -779,7 +779,7 @@ final class Test
                         } catch (ReflectionException $e) {
                             throw new Exception(
                                 $e->getMessage(),
-                                (int) $e->getCode(),
+                                $e->getCode(),
                                 $e
                             );
                         }
@@ -824,7 +824,7 @@ final class Test
                 } catch (ReflectionException $e) {
                     throw new Exception(
                         $e->getMessage(),
-                        (int) $e->getCode(),
+                        $e->getCode(),
                         $e
                     );
                 }

@@ -254,3 +254,186 @@ $_SERVER = [
     ]
     'argc' => 4
 ]
+2026-07-28 03:33:28 [-][-][-][error][yii\console\UnknownCommandException] yii\base\InvalidRouteException: Unable to resolve the request: migrate/list in /home/yht/Github/b2b-web-id/pde-idx-app/vendor/yiisoft/yii2/base/Controller.php:151
+Stack trace:
+#0 /home/yht/Github/b2b-web-id/pde-idx-app/vendor/yiisoft/yii2/console/Controller.php(179): yii\base\Controller->runAction()
+#1 /home/yht/Github/b2b-web-id/pde-idx-app/vendor/yiisoft/yii2/base/Module.php(528): yii\console\Controller->runAction()
+#2 /home/yht/Github/b2b-web-id/pde-idx-app/vendor/yiisoft/yii2/console/Application.php(180): yii\base\Module->runAction()
+#3 /home/yht/Github/b2b-web-id/pde-idx-app/vendor/yiisoft/yii2/console/Application.php(147): yii\console\Application->runAction()
+#4 /home/yht/Github/b2b-web-id/pde-idx-app/vendor/yiisoft/yii2/base/Application.php(386): yii\console\Application->handleRequest()
+#5 /home/yht/Github/b2b-web-id/pde-idx-app/yii(20): yii\base\Application->run()
+#6 {main}
+
+Next yii\console\UnknownCommandException: Unknown command "migrate/list". in /home/yht/Github/b2b-web-id/pde-idx-app/vendor/yiisoft/yii2/console/Application.php:183
+Stack trace:
+#0 /home/yht/Github/b2b-web-id/pde-idx-app/vendor/yiisoft/yii2/console/Application.php(147): yii\console\Application->runAction()
+#1 /home/yht/Github/b2b-web-id/pde-idx-app/vendor/yiisoft/yii2/base/Application.php(386): yii\console\Application->handleRequest()
+#2 /home/yht/Github/b2b-web-id/pde-idx-app/yii(20): yii\base\Application->run()
+#3 {main}
+2026-07-28 03:33:28 [-][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'SHELL' => '/bin/bash'
+    'SESSION_MANAGER' => 'local/thinkpad-p53:@/tmp/.ICE-unix/3240,unix/thinkpad-p53:/tmp/.ICE-unix/3240'
+    'QT_ACCESSIBILITY' => '1'
+    'COLORTERM' => 'truecolor'
+    'PI_CODING_AGENT' => 'true'
+    'PYENV_SHELL' => 'bash'
+    'GTK_IM_MODULE' => 'ibus'
+    'CLUTTER_BACKEND' => 'x11,*'
+    'SSH_AUTH_SOCK' => '/run/user/1000/keyring/ssh'
+    'PI_REASONING_LEVEL' => 'medium'
+    'PI_SESSION_FILE' => '/home/yht/.pi/agent/sessions/--home-yht-Github-b2b-web-id-pde-idx-app--/2026-07-28T02-36-53-194Z_019fa695-0a4a-7da2-9b4d-a1c92499ae17.jsonl'
+    'XMODIFIERS' => '@im=ibus'
+    'DESKTOP_SESSION' => 'mate'
+    'GTK_MODULES' => 'gail:atk-bridge:gail:atk-bridge:canberra-gtk-module'
+    'XDG_SEAT' => 'seat0'
+    'MATE_DESKTOP_SESSION_ID' => 'this-is-deprecated'
+    'PWD' => '/home/yht/Github/b2b-web-id/pde-idx-app'
+    'PYENV_VIRTUALENV_INIT' => '1'
+    'XDG_SESSION_DESKTOP' => 'mate'
+    'LOGNAME' => 'yht'
+    'XDG_SESSION_TYPE' => 'x11'
+    'GPG_AGENT_INFO' => '/run/user/1000/gnupg/S.gpg-agent:0:1'
+    'XAUTHORITY' => '/run/user/1000/gdm/Xauthority'
+    'WINDOWPATH' => '2'
+    'GDM_LANG' => 'id_ID.UTF-8'
+    'HOME' => '/home/yht'
+    'USERNAME' => 'yht'
+    'LANG' => 'id_ID.UTF-8'
+    'LS_COLORS' => 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.7z=01;31:*.ace=01;31:*.alz=01;31:*.apk=01;31:*.arc=01;31:*.arj=01;31:*.bz=01;31:*.bz2=01;31:*.cab=01;31:*.cpio=01;31:*.crate=01;31:*.deb=01;31:*.drpm=01;31:*.dwm=01;31:*.dz=01;31:*.ear=01;31:*.egg=01;31:*.esd=01;31:*.gz=01;31:*.jar=01;31:*.lha=01;31:*.lrz=01;31:*.lz=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.lzo=01;31:*.pyz=01;31:*.rar=01;31:*.rpm=01;31:*.rz=01;31:*.sar=01;31:*.swm=01;31:*.t7z=01;31:*.tar=01;31:*.taz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tgz=01;31:*.tlz=01;31:*.txz=01;31:*.tz=01;31:*.tzo=01;31:*.tzst=01;31:*.udeb=01;31:*.war=01;31:*.whl=01;31:*.wim=01;31:*.xz=01;31:*.z=01;31:*.zip=01;31:*.zoo=01;31:*.zst=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.jxl=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:'
+    'XDG_CURRENT_DESKTOP' => 'MATE'
+    'VTE_VERSION' => '8001'
+    'PI_PROVIDER' => 'openrouter'
+    'CLUTTER_IM_MODULE' => 'ibus'
+    'PI_MODEL' => 'inclusionai/ling-3.0-flash:free'
+    'XDG_SESSION_CLASS' => 'user'
+    'TERM' => 'xterm-256color'
+    'GTK_OVERLAY_SCROLLING' => '0'
+    'USER' => 'yht'
+    'PI_SESSION_ID' => '019fa695-0a4a-7da2-9b4d-a1c92499ae17'
+    'DISPLAY' => ':0'
+    'SHLVL' => '2'
+    'QT_IM_MODULE' => 'ibus'
+    'XDG_VTNR' => '2'
+    'XDG_SESSION_ID' => '3'
+    'XDG_RUNTIME_DIR' => '/run/user/1000'
+    'PYENV_ROOT' => '/home/yht/.pyenv'
+    'GTK3_MODULES' => 'xapp-gtk3-module'
+    'XDG_DATA_DIRS' => '/usr/share/mate:/usr/share/gnome:/usr/local/share/:/usr/share/'
+    'PATH' => '/home/yht/.pi/agent/bin:/home/yht/.local/bin:/home/yht/.pyenv/plugins/pyenv-virtualenv/shims:/home/yht/.pyenv/shims:/home/yht/.pyenv/bin:/home/yht/.local/bin:/home/yht/bin:/home/yht/.local/share/../bin:/home/yht/.local/bin:/home/yht/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games'
+    'GDMSESSION' => 'mate'
+    'DBUS_SESSION_BUS_ADDRESS' => 'unix:path=/run/user/1000/bus'
+    'QT_FONT_DPI' => '96'
+    'QT_SCALE_FACTOR' => '1'
+    'GIO_LAUNCHED_DESKTOP_FILE_PID' => '4426'
+    'GIO_LAUNCHED_DESKTOP_FILE' => '/usr/share/applications/lxterminal.desktop'
+    'OLDPWD' => '/home/yht/Github/b2b-web-id'
+    '_' => '/usr/bin/php'
+    'PHP_SELF' => 'yii'
+    'SCRIPT_NAME' => 'yii'
+    'SCRIPT_FILENAME' => 'yii'
+    'PATH_TRANSLATED' => 'yii'
+    'DOCUMENT_ROOT' => ''
+    'REQUEST_TIME_FLOAT' => 1785209608.8587
+    'REQUEST_TIME' => 1785209608
+    'argv' => [
+        0 => 'yii'
+        1 => 'migrate/list'
+    ]
+    'argc' => 2
+]
+2026-07-28 03:34:01 [-][-][-][error][yii\console\UnknownCommandException] yii\base\InvalidRouteException: Unable to resolve the request: migrate/list in /home/yht/Github/b2b-web-id/pde-idx-app/vendor/yiisoft/yii2/base/Controller.php:151
+Stack trace:
+#0 /home/yht/Github/b2b-web-id/pde-idx-app/vendor/yiisoft/yii2/console/Controller.php(179): yii\base\Controller->runAction()
+#1 /home/yht/Github/b2b-web-id/pde-idx-app/vendor/yiisoft/yii2/base/Module.php(528): yii\console\Controller->runAction()
+#2 /home/yht/Github/b2b-web-id/pde-idx-app/vendor/yiisoft/yii2/console/Application.php(180): yii\base\Module->runAction()
+#3 /home/yht/Github/b2b-web-id/pde-idx-app/vendor/yiisoft/yii2/console/Application.php(147): yii\console\Application->runAction()
+#4 /home/yht/Github/b2b-web-id/pde-idx-app/vendor/yiisoft/yii2/base/Application.php(386): yii\console\Application->handleRequest()
+#5 /home/yht/Github/b2b-web-id/pde-idx-app/yii(20): yii\base\Application->run()
+#6 {main}
+
+Next yii\console\UnknownCommandException: Unknown command "migrate/list". in /home/yht/Github/b2b-web-id/pde-idx-app/vendor/yiisoft/yii2/console/Application.php:183
+Stack trace:
+#0 /home/yht/Github/b2b-web-id/pde-idx-app/vendor/yiisoft/yii2/console/Application.php(147): yii\console\Application->runAction()
+#1 /home/yht/Github/b2b-web-id/pde-idx-app/vendor/yiisoft/yii2/base/Application.php(386): yii\console\Application->handleRequest()
+#2 /home/yht/Github/b2b-web-id/pde-idx-app/yii(20): yii\base\Application->run()
+#3 {main}
+2026-07-28 03:34:01 [-][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'SHELL' => '/bin/bash'
+    'SESSION_MANAGER' => 'local/thinkpad-p53:@/tmp/.ICE-unix/3240,unix/thinkpad-p53:/tmp/.ICE-unix/3240'
+    'QT_ACCESSIBILITY' => '1'
+    'COLORTERM' => 'truecolor'
+    'PYENV_SHELL' => 'bash'
+    'GTK_IM_MODULE' => 'ibus'
+    'CLUTTER_BACKEND' => 'x11,*'
+    'SSH_AUTH_SOCK' => '/run/user/1000/keyring/ssh'
+    'XMODIFIERS' => '@im=ibus'
+    'DESKTOP_SESSION' => 'mate'
+    'GTK_MODULES' => 'gail:atk-bridge:gail:atk-bridge:canberra-gtk-module'
+    'XDG_SEAT' => 'seat0'
+    'MATE_DESKTOP_SESSION_ID' => 'this-is-deprecated'
+    'PWD' => '/home/yht/Github/b2b-web-id/pde-idx-app'
+    'PYENV_VIRTUALENV_INIT' => '1'
+    'LOGNAME' => 'yht'
+    'XDG_SESSION_DESKTOP' => 'mate'
+    'XDG_SESSION_TYPE' => 'x11'
+    'GPG_AGENT_INFO' => '/run/user/1000/gnupg/S.gpg-agent:0:1'
+    'XAUTHORITY' => '/run/user/1000/gdm/Xauthority'
+    'WINDOWPATH' => '2'
+    'GDM_LANG' => 'id_ID.UTF-8'
+    'HOME' => '/home/yht'
+    'USERNAME' => 'yht'
+    'LANG' => 'id_ID.UTF-8'
+    'LS_COLORS' => 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.7z=01;31:*.ace=01;31:*.alz=01;31:*.apk=01;31:*.arc=01;31:*.arj=01;31:*.bz=01;31:*.bz2=01;31:*.cab=01;31:*.cpio=01;31:*.crate=01;31:*.deb=01;31:*.drpm=01;31:*.dwm=01;31:*.dz=01;31:*.ear=01;31:*.egg=01;31:*.esd=01;31:*.gz=01;31:*.jar=01;31:*.lha=01;31:*.lrz=01;31:*.lz=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.lzo=01;31:*.pyz=01;31:*.rar=01;31:*.rpm=01;31:*.rz=01;31:*.sar=01;31:*.swm=01;31:*.t7z=01;31:*.tar=01;31:*.taz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tgz=01;31:*.tlz=01;31:*.txz=01;31:*.tz=01;31:*.tzo=01;31:*.tzst=01;31:*.udeb=01;31:*.war=01;31:*.whl=01;31:*.wim=01;31:*.xz=01;31:*.z=01;31:*.zip=01;31:*.zoo=01;31:*.zst=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.jxl=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:'
+    'XDG_CURRENT_DESKTOP' => 'MATE'
+    'VTE_VERSION' => '8001'
+    'CLUTTER_IM_MODULE' => 'ibus'
+    'XDG_SESSION_CLASS' => 'user'
+    'TERM' => 'xterm-256color'
+    'GTK_OVERLAY_SCROLLING' => '0'
+    'USER' => 'yht'
+    'DISPLAY' => ':0'
+    'SHLVL' => '1'
+    'QT_IM_MODULE' => 'ibus'
+    'XDG_VTNR' => '2'
+    'XDG_SESSION_ID' => '3'
+    'XDG_RUNTIME_DIR' => '/run/user/1000'
+    'PYENV_ROOT' => '/home/yht/.pyenv'
+    'GTK3_MODULES' => 'xapp-gtk3-module'
+    'XDG_DATA_DIRS' => '/usr/share/mate:/usr/share/gnome:/usr/local/share/:/usr/share/'
+    'PATH' => '/home/yht/.local/bin:/home/yht/.pyenv/plugins/pyenv-virtualenv/shims:/home/yht/.pyenv/shims:/home/yht/.pyenv/bin:/home/yht/.local/bin:/home/yht/bin:/home/yht/.local/share/../bin:/home/yht/.local/bin:/home/yht/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games'
+    'GDMSESSION' => 'mate'
+    'DBUS_SESSION_BUS_ADDRESS' => 'unix:path=/run/user/1000/bus'
+    'QT_FONT_DPI' => '96'
+    'QT_SCALE_FACTOR' => '1'
+    'GIO_LAUNCHED_DESKTOP_FILE_PID' => '4426'
+    'GIO_LAUNCHED_DESKTOP_FILE' => '/usr/share/applications/lxterminal.desktop'
+    '_' => './yii'
+    'PHP_SELF' => './yii'
+    'SCRIPT_NAME' => './yii'
+    'SCRIPT_FILENAME' => './yii'
+    'PATH_TRANSLATED' => './yii'
+    'DOCUMENT_ROOT' => ''
+    'REQUEST_TIME_FLOAT' => 1785209641.4257
+    'REQUEST_TIME' => 1785209641
+    'argv' => [
+        0 => './yii'
+        1 => 'migrate/list'
+    ]
+    'argc' => 2
+]

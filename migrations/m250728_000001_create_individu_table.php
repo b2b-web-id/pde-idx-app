@@ -8,7 +8,7 @@ use yii\db\Migration;
  */
 class m250728_000001_create_individu_table extends Migration
 {
-    public function safeUp()
+    public function up()
     {
         $this->createTable('{{%individu}}', [
             'ID' => $this->primaryKey(),
@@ -25,10 +25,13 @@ class m250728_000001_create_individu_table extends Migration
         ]);
 
         $this->createIndex('idx-individu-nama', '{{%individu}}', 'NAMA', true);
+
+        return true;
     }
 
-    public function safeDown()
+    public function down()
     {
         $this->dropTable('{{%individu}}');
+        return true;
     }
 }

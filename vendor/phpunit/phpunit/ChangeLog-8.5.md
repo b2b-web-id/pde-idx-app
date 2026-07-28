@@ -2,6 +2,214 @@
 
 All notable changes of the PHPUnit 8.5 release series are documented in this file using the [Keep a CHANGELOG](https://keepachangelog.com/) principles.
 
+## [8.5.53] - 2026-07-06
+
+### Changed
+
+* [#6797](https://github.com/sebastianbergmann/phpunit/issues/6797): Adapt code generated for test double of interface with constructor for PHP 8.6
+
+## [8.5.52] - 2026-01-27
+
+### Changed
+
+* To prevent Poisoned Pipeline Execution (PPE) attacks using prepared `.coverage` files in pull requests, a PHPT test will no longer be run if the temporary file for writing code coverage information already exists before the test runs
+
+## [8.5.51] - 2026-01-24
+
+### Changed
+
+* `PHPUnit\Framework\MockObject` exceptions are now subtypes of `PHPUnit\Exception`
+
+## [8.5.50] - 2025-12-06
+
+* No changes; `phpunit.phar` rebuilt with PHP 8.4 to work around PHP-Scoper issue [#1139](https://github.com/humbug/php-scoper/issues/1139)
+
+## [8.5.49] - 2025-12-01
+
+* No changes; `phpunit.phar` rebuilt with updated dependencies
+
+## [8.5.48] - 2025-09-24
+
+* No changes; `phpunit.phar` rebuilt with updated dependencies
+
+## [8.5.47] - 2025-09-23
+
+* No changes; `phpunit.phar` rebuilt with updated dependencies
+
+## [8.5.46] - 2025-09-14
+
+### Changed
+
+* [#6366](https://github.com/sebastianbergmann/phpunit/issues/6366): Exclude `__sleep()` and `__wakeup()` from test double code generation on PHP >= 8.5
+
+## [8.5.45] - 2025-09-11
+
+### Changed
+
+* Implement `__serialize()` in addition to `__sleep()` (which will be deprecated in PHP 8.5)
+
+## [8.5.44] - 2025-08-20
+
+### Changed
+
+* Do not configure `report_memleaks` setting (which will be deprecated in PHP 8.5) for PHPT processes
+
+## [8.5.43] - 2025-08-10
+
+### Changed
+
+* Do not use `ReflectionProperty::setAccessible()` with PHP >= 8.1
+* Do not use `SplObjectStorage` methods that will be deprecated in PHP 8.5
+
+## [8.5.42] - 2025-05-02
+
+### Changed
+
+* [#5956](https://github.com/sebastianbergmann/phpunit/issues/5956): Improved handling of deprecated `E_STRICT` constant
+* Improved message when test is considered risky for printing unexpected output
+
+## [8.5.41] - 2024-12-05
+
+### Fixed
+
+* [#6071](https://github.com/sebastianbergmann/phpunit/issues/6071): PHP Archives (PHARs) of PHPUnit 8.5 and PHPUnit 9.6 bundle outdated versions of Prophecy
+
+## [8.5.40] - 2024-09-19
+
+### Changed
+
+* [#5956](https://github.com/sebastianbergmann/phpunit/issues/5956): Deprecation of the `E_STRICT` constant in PHP 8.4
+* Removed `.phpstorm.meta.php` file as methods such as `TestCase::createStub()` use generics / template types for their return types and PhpStorm, for example, uses that information
+
+## [8.5.39] - 2024-07-10
+
+### Changed
+
+* Updated dependencies (so that users that install using Composer's `--prefer-lowest` CLI option also get recent versions)
+
+## [8.5.38] - 2024-04-05
+
+### Changed
+
+* The namespaces of dependencies are now prefixed with `PHPUnitPHAR` instead of just `PHPUnit` for the PHAR distribution of PHPUnit
+
+## [8.5.37] - 2024-03-06
+
+### Changed
+
+* Improve output of `--check-version` CLI option
+* Improve description of `--check-version` CLI option
+* Show help for `--manifest`, `--sbom`, and `--composer-lock` when the PHAR is used
+* Make PHAR build reproducible (the only remaining differences were in the timestamps for the files in the PHAR)
+
+## [8.5.36] - 2023-12-01
+
+### Fixed
+
+* [#5596](https://github.com/sebastianbergmann/phpunit/issues/5596): `PHPUnit\Framework\TestCase` has `@internal` annotation in PHAR
+
+## [8.5.35] - 2023-12-01
+
+### Added
+
+* [#5577](https://github.com/sebastianbergmann/phpunit/issues/5577): `--composer-lock` CLI option for PHAR binary that displays the `composer.lock` used to build the PHAR
+
+## [8.5.34] - 2023-09-19
+
+### Changed
+
+* The child processes used for process isolation now use temporary files to communicate their result to the parent process
+
+## [8.5.33] - 2023-02-27
+
+### Fixed
+
+* [#5186](https://github.com/sebastianbergmann/phpunit/issues/5186): SBOM does not validate
+
+## [8.5.32] - 2023-01-26
+
+### Fixed
+
+* [#5120](https://github.com/sebastianbergmann/phpunit/issues/5120): Test Runner incorrectly treats `--testsuite` and `--list-tests` as not combinable options
+
+## [8.5.31] - 2022-10-28
+
+### Fixed
+
+* [#5076](https://github.com/sebastianbergmann/phpunit/issues/5076): Test Runner does not warn about conflicting options
+
+## [8.5.30] - 2022-09-25
+
+### Changed
+
+* The configuration generator now asks for a cache directory
+
+### Fixed
+
+* [#4913](https://github.com/sebastianbergmann/phpunit/issues/4913): Failed `assert()` should show a backtrace
+* [#4966](https://github.com/sebastianbergmann/phpunit/issues/4966): `TestCase::assertSame()` (and related exact comparisons) must compare `float` exactly
+
+## [8.5.29] - 2022-08-22
+
+### Changed
+
+* [#5033](https://github.com/sebastianbergmann/phpunit/issues/5033): Do not depend on phpspec/prophecy
+
+## [8.5.28] - 2022-07-29
+
+### Fixed
+
+* [#5015](https://github.com/sebastianbergmann/phpunit/pull/5015): Ukraine banner unreadable on black background
+* [#5016](https://github.com/sebastianbergmann/phpunit/issues/5016): PHPUnit 8.5.27 does not work on PHP 7.2.0-7.2.18 and PHP 7.3.0-7.3.5
+
+## [8.5.27] - 2022-06-19
+
+### Fixed
+
+* [#4950](https://github.com/sebastianbergmann/phpunit/issues/4950): False error on `atMost()` invocation rule without call
+* [#4962](https://github.com/sebastianbergmann/phpunit/issues/4962): Ukraine banner unreadable on white background
+
+## [8.5.26] - 2022-04-01
+
+### Fixed
+
+* [#4938](https://github.com/sebastianbergmann/phpunit/issues/4938): Test Double code generator does not handle `void` return type declaration on `__clone()` methods
+
+## [8.5.25] - 2022-03-16
+
+### Fixed
+
+* [#4934](https://github.com/sebastianbergmann/phpunit/issues/4934): Code Coverage does not work with PHPUnit 8.5.24 PHAR on PHP 7
+
+## [8.5.24] - 2022-03-05 - #StandWithUkraine
+
+### Changed
+
+* [#4874](https://github.com/sebastianbergmann/phpunit/pull/4874): `PHP_FLOAT_EPSILON` is now used instead of hardcoded `0.0000000001` in `PHPUnit\Framework\Constraint\IsIdentical`
+
+### Fixed
+
+* When the HTML code coverage report's configured low upper bound is larger than the high lower bound then the default values are used instead
+
+## [8.5.23] - 2022-01-21
+
+### Fixed
+
+* [#4799](https://github.com/sebastianbergmann/phpunit/pull/4799): Memory leaks in `PHPUnit\Framework\TestSuite` class
+* [#4857](https://github.com/sebastianbergmann/phpunit/pull/4857): Result of `debug_backtrace()` is not used correctly
+
+## [8.5.22] - 2021-12-25
+
+### Changed
+
+* [#4812](https://github.com/sebastianbergmann/phpunit/issues/4812): Do not enforce time limits when a debugging session through DBGp is active
+* [#4835](https://github.com/sebastianbergmann/phpunit/issues/4835): Support for `$GLOBALS['_composer_autoload_path']` introduced in Composer 2.2
+
+### Fixed
+
+* [#4840](https://github.com/sebastianbergmann/phpunit/pull/4840): TestDox prettifying for class names does not correctly handle diacritics
+* [#4846](https://github.com/sebastianbergmann/phpunit/pull/4846): Composer proxy script is not ignored
+
 ## [8.5.21] - 2021-09-25
 
 ### Changed
@@ -178,6 +386,38 @@ All notable changes of the PHPUnit 8.5 release series are documented in this fil
 * [#3967](https://github.com/sebastianbergmann/phpunit/issues/3967): Cannot double interface that extends interface that extends `\Throwable`
 * [#3968](https://github.com/sebastianbergmann/phpunit/pull/3968): Test class run in a separate PHP process are passing when `exit` called inside
 
+[8.5.53]: https://github.com/sebastianbergmann/phpunit/compare/8.5.52...8.5.53
+[8.5.52]: https://github.com/sebastianbergmann/phpunit/compare/8.5.51...8.5.52
+[8.5.51]: https://github.com/sebastianbergmann/phpunit/compare/8.5.50...8.5.51
+[8.5.50]: https://github.com/sebastianbergmann/phpunit/compare/8.5.49...8.5.50
+[8.5.49]: https://github.com/sebastianbergmann/phpunit/compare/8.5.48...8.5.49
+[8.5.48]: https://github.com/sebastianbergmann/phpunit/compare/8.5.47...8.5.48
+[8.5.47]: https://github.com/sebastianbergmann/phpunit/compare/8.5.46...8.5.47
+[8.5.46]: https://github.com/sebastianbergmann/phpunit/compare/8.5.45...8.5.46
+[8.5.45]: https://github.com/sebastianbergmann/phpunit/compare/8.5.44...8.5.45
+[8.5.44]: https://github.com/sebastianbergmann/phpunit/compare/8.5.43...8.5.44
+[8.5.43]: https://github.com/sebastianbergmann/phpunit/compare/8.5.42...8.5.43
+[8.5.42]: https://github.com/sebastianbergmann/phpunit/compare/8.5.41...8.5.42
+[8.5.41]: https://github.com/sebastianbergmann/phpunit/compare/8.5.40...8.5.41
+[8.5.40]: https://github.com/sebastianbergmann/phpunit/compare/8.5.39...8.5.40
+[8.5.39]: https://github.com/sebastianbergmann/phpunit/compare/8.5.38...8.5.39
+[8.5.38]: https://github.com/sebastianbergmann/phpunit/compare/8.5.37...8.5.38
+[8.5.37]: https://github.com/sebastianbergmann/phpunit/compare/8.5.36...8.5.37
+[8.5.36]: https://github.com/sebastianbergmann/phpunit/compare/8.5.35...8.5.36
+[8.5.35]: https://github.com/sebastianbergmann/phpunit/compare/8.5.34...8.5.35
+[8.5.34]: https://github.com/sebastianbergmann/phpunit/compare/8.5.33...8.5.34
+[8.5.33]: https://github.com/sebastianbergmann/phpunit/compare/8.5.32...8.5.33
+[8.5.32]: https://github.com/sebastianbergmann/phpunit/compare/8.5.31...8.5.32
+[8.5.31]: https://github.com/sebastianbergmann/phpunit/compare/8.5.30...8.5.31
+[8.5.30]: https://github.com/sebastianbergmann/phpunit/compare/8.5.29...8.5.30
+[8.5.29]: https://github.com/sebastianbergmann/phpunit/compare/8.5.28...8.5.29
+[8.5.28]: https://github.com/sebastianbergmann/phpunit/compare/8.5.27...8.5.28
+[8.5.27]: https://github.com/sebastianbergmann/phpunit/compare/8.5.26...8.5.27
+[8.5.26]: https://github.com/sebastianbergmann/phpunit/compare/8.5.25...8.5.26
+[8.5.25]: https://github.com/sebastianbergmann/phpunit/compare/8.5.24...8.5.25
+[8.5.24]: https://github.com/sebastianbergmann/phpunit/compare/8.5.23...8.5.24
+[8.5.23]: https://github.com/sebastianbergmann/phpunit/compare/8.5.22...8.5.23
+[8.5.22]: https://github.com/sebastianbergmann/phpunit/compare/8.5.21...8.5.22
 [8.5.21]: https://github.com/sebastianbergmann/phpunit/compare/8.5.20...8.5.21
 [8.5.20]: https://github.com/sebastianbergmann/phpunit/compare/8.5.19...8.5.20
 [8.5.19]: https://github.com/sebastianbergmann/phpunit/compare/8.5.18...8.5.19

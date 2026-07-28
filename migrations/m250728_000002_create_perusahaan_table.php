@@ -8,7 +8,7 @@ use yii\db\Migration;
  */
 class m250728_000002_create_perusahaan_table extends Migration
 {
-    public function safeUp()
+    public function up()
     {
         $this->createTable('{{%perusahaan}}', [
             'ID' => $this->primaryKey(),
@@ -29,10 +29,13 @@ class m250728_000002_create_perusahaan_table extends Migration
 
         $this->createIndex('idx-perusahaan-nama', '{{%perusahaan}}', 'NAMA', true);
         $this->createIndex('idx-perusahaan-idx-kode', '{{%perusahaan}}', 'IDX_KODE');
+
+        return true;
     }
 
-    public function safeDown()
+    public function down()
     {
         $this->dropTable('{{%perusahaan}}');
+        return true;
     }
 }
