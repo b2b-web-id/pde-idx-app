@@ -67,4 +67,9 @@ class Individu extends \yii\db\ActiveRecord
         return $this->hasMany(Perusahaan::className(), ['ID' => 'PERUSAHAAN_ID'])
             ->via('individuPerusahaans');
     }
+
+    public function getEntitas()
+    {
+        return $this->hasOne(Entitas::className(), ['individu_id' => 'ID']);
+    }
 }

@@ -9,7 +9,7 @@ class KepemilikanPerusahaanSearch extends KepemilikanPerusahaan
     public function rules()
     {
         return [
-            [['id', 'pemilik_id', 'perusahaan_id', 'jumlah_saham'], 'integer'],
+            [['id', 'pemilik_entitas_id', 'perusahaan_id', 'jumlah_saham'], 'integer'],
             [['persentase_kepemilikan', 'persentase_hak_suara'], 'number'],
             [['jenis_kepemilikan', 'status_kontrol', 'sumber_data', 'tanggal_data'], 'safe'],
         ];
@@ -17,7 +17,7 @@ class KepemilikanPerusahaanSearch extends KepemilikanPerusahaan
 
     public function search($params)
     {
-        $query = KepemilikanPerusahaan::find()->joinWith(['pemilik', 'perusahaan']);
+        $query = KepemilikanPerusahaan::find()->joinWith(['pemilikEntitas', 'perusahaan']);
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => ['pageSize' => 20],
@@ -25,10 +25,10 @@ class KepemilikanPerusahaanSearch extends KepemilikanPerusahaan
                 'attributes' => [
                     'tanggal_data',
                     'persentase_kepemilikan',
-                    'pemilik.NAMA' => [
-                        'asc' => ['pemilik.NAMA' => SORT_ASC],
-                        'desc' => ['pemilik.NAMA' => SORT_DESC],
-                        'label' => 'Perusahaan Pemilik',
+                    'pemilikEntitas.nama_display' => [
+                        'asc' => ['entitas.nama_display' => SORT_ASC],
+                        'desc' => ['entitas.nama_display' => SORT_DESC],
+                        'label' => 'Pemegang Saham',
                     ],
                     'perusahaan.NAMA' => [
                         'asc' => ['target_perusahaan.NAMA' => SORT_ASC],
@@ -46,7 +46,7 @@ class KepemilikanPerusahaanSearch extends KepemilikanPerusahaan
 
         $query->andFilterWhere([
             'kepemilikan_perusahaan.id' => $this->id,
-            'kepemilikan_perusahaan.pemilik_id' => $this->pemilik_id,
+            'kepemilikan_perusahaan.pemilik_entitas_id' => $this->pemilik_entitas_id,
             'kepemilikan_perusahaan.perusahaan_id' => $this->perusahaan_id,
             'kepemilikan_perusahaan.jenis_kepemilikan' => $this->jenis_kepemilikan,
             'kepemilikan_perusahaan.tanggal_data' => $this->tanggal_data,

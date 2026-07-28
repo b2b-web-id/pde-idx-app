@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
     'model' => $model,
     'attributes' => [
         'id',
-        ['label' => 'Perusahaan Pemilik', 'value' => $model->pemilik ? $model->pemilik->NAMA : '-'],
+        ['label' => 'Pemegang Saham', 'value' => $model->pemilikEntitas ? $model->pemilikEntitas->nama_display : '-'],
         ['label' => 'Perusahaan Target', 'value' => $model->perusahaan ? $model->perusahaan->NAMA : '-'],
         'jumlah_saham',
         'persentase_kepemilikan:decimal',

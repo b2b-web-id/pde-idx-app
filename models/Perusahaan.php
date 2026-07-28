@@ -34,8 +34,8 @@ use Yii;
  * @property BiroAdminEfek $biroAdminEfek
  * @property IndividuPerusahaan[] $individuPerusahaans
  * @property Individu[] $individus
- * @property KepemilikanPerusahaan[] $kepemilikanSebagaiPemilik
  * @property KepemilikanPerusahaan[] $kepemilikanSebagaiTarget
+ * @property Entitas $entitas
  */
 class Perusahaan extends \yii\db\ActiveRecord
 {
@@ -133,12 +133,9 @@ class Perusahaan extends \yii\db\ActiveRecord
             ->via('individuPerusahaans');
     }
 
-    /**
-     * Ownership records where this company is the shareholder.
-     */
-    public function getKepemilikanSebagaiPemilik()
+    public function getEntitas()
     {
-        return $this->hasMany(KepemilikanPerusahaan::className(), ['pemilik_id' => 'ID']);
+        return $this->hasOne(Entitas::className(), ['perusahaan_id' => 'ID']);
     }
 
     /**

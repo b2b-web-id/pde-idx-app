@@ -62,9 +62,9 @@ Unique index pada pasangan individu/perusahaan mencegah duplikasi relasi. Foreig
 
 ### 4.3 Kepemilikan Perusahaan
 
-`KepemilikanPerusahaan` adalah edge berarah dari `pemilik_id` ke `perusahaan_id`. Karena fase ini menetapkan entitas sebagai `Perusahaan`, pemegang saham yang dapat direferensikan adalah perusahaan lain.
+`KepemilikanPerusahaan` adalah edge berarah dari `pemilik_entitas_id` ke `perusahaan_id`. Pemilik dapat berupa entitas individu, perusahaan, kelompok publik, saham treasury, atau entitas eksternal.
 
-Anak perusahaan tidak dibuat sebagai tabel terpisah. Ia ditampilkan dari relasi ketika perusahaan menjadi `pemilik_id`. Setiap record menyimpan snapshot `tanggal_data`, `sumber_data`, persentase kepemilikan/hak suara, periode berlaku, dan referensi sumber. Unique key snapshot mencegah duplikasi tanpa menghapus histori.
+Anak perusahaan tidak dibuat sebagai tabel terpisah. Ia ditampilkan dari relasi ketika entitas pemilik adalah perusahaan. Setiap record menyimpan snapshot `tanggal_data`, `sumber_data`, persentase kepemilikan/hak suara, periode berlaku, dan referensi sumber. Unique key snapshot mencegah duplikasi tanpa menghapus histori.
 
 ### 4.4 Pengguna
 

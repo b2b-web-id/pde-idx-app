@@ -5,7 +5,7 @@ namespace app\models;
 use yii\db\ActiveRecord;
 
 /**
- * Company-to-company ownership snapshot.
+ * Ownership snapshot where the target is a company and the owner is an entity.
  *
  * A subsidiary is represented by a record where the owner is a company and
  * the target is the subsidiary company. Historical snapshots remain distinct
@@ -24,8 +24,8 @@ class KepemilikanPerusahaan extends ActiveRecord
     public function rules()
     {
         return [
-            [['pemilik_id', 'perusahaan_id', 'tanggal_data'], 'required'],
-            [['pemilik_id', 'perusahaan_id', 'jumlah_saham'], 'integer'],
+            [['pemilik_entitas_id', 'perusahaan_id', 'tanggal_data'], 'required'],
+            [['pemilik_entitas_id', 'perusahaan_id', 'jumlah_saham'], 'integer'],
             [['persentase_kepemilikan', 'persentase_hak_suara'], 'number', 'min' => 0, 'max' => 100],
             [['tanggal_data', 'berlaku_mulai', 'berlaku_sampai', 'created_at', 'updated_at'], 'safe'],
             [['jenis_kepemilikan'], 'in', 'range' => array_keys(self::getJenisKepemilikanOptions())],
@@ -33,9 +33,9 @@ class KepemilikanPerusahaan extends ActiveRecord
             [['status_kontrol'], 'string', 'max' => 30],
             [['sumber_data'], 'string', 'max' => 100],
             [['referensi_data'], 'string', 'max' => 255],
-            [['pemilik_id'], 'exist', 'targetClass' => Perusahaan::className(), 'targetAttribute' => ['pemilik_id' => 'ID']],
+            [['pemilik_entitas_id'], 'exist', 'targetClass' => Entitas::className(), 'targetAttribute' => ['pemilik_entitas_id' => 'id']],
             [['perusahaan_id'], 'exist', 'targetClass' => Perusahaan::className(), 'targetAttribute' => ['perusahaan_id' => 'ID']],
-            [['pemilik_id', 'perusahaan_id', 'tanggal_data', 'sumber_data'], 'unique', 'targetAttribute' => ['pemilik_id', 'perusahaan_id', 'tanggal_data', 'sumber_data']],
+            [['pemilik_entitas_id', 'perusahaan_id', 'tanggal_data', 'sumber_data'], 'unique', 'targetAttribute' => ['pemilik_entitas_id', 'perusahaan_id', 'tanggal_data', 'sumber_data']],
             [['perusahaan_id'], 'validateDistinctCompanies'],
             [['berlaku_sampai'], 'compare', 'compareAttribute' => 'berlaku_mulai', 'operator' => '>=', 'when' => function ($model) {
                 return $model->berlaku_sampai && $model->berlaku_mulai;
@@ -45,7 +45,7 @@ class KepemilikanPerusahaan extends ActiveRecord
 
     public function validateDistinctCompanies($attribute)
     {
-        if ((int) $this->pemilik_id === (int) $this->perusahaan_id && $this->pemilik_id !== null) {
+        if ($this->pemilikEntitas && (int) $this->pemilikEntitas->perusahaan_id === (int) $this->perusahaan_id) {
             $this->addError($attribute, 'Perusahaan pemilik dan perusahaan target harus berbeda.');
         }
     }
@@ -53,7 +53,7 @@ class KepemilikanPerusahaan extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'pemilik_id' => 'Perusahaan Pemilik',
+            'pemilik_entitas_id' => 'Pemegang Saham',
             'perusahaan_id' => 'Perusahaan Target',
             'jumlah_saham' => 'Jumlah Saham',
             'persentase_kepemilikan' => 'Persentase Kepemilikan',
@@ -76,10 +76,9 @@ class KepemilikanPerusahaan extends ActiveRecord
         ];
     }
 
-    public function getPemilik()
+    public function getPemilikEntitas()
     {
-        return $this->hasOne(Perusahaan::className(), ['ID' => 'pemilik_id'])
-            ->from(['pemilik' => Perusahaan::tableName()]);
+        return $this->hasOne(Entitas::className(), ['id' => 'pemilik_entitas_id']);
     }
 
     public function getPerusahaan()

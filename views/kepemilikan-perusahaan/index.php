@@ -26,9 +26,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             [
-                'attribute' => 'pemilik.NAMA',
-                'label' => 'Perusahaan Pemilik',
-                'value' => function ($model) { return $model->pemilik ? $model->pemilik->NAMA : '-'; },
+                'attribute' => 'pemilikEntitas.nama_display',
+                'label' => 'Pemegang Saham',
+                'value' => function ($model) { return $model->pemilikEntitas ? $model->pemilikEntitas->nama_display : '-'; },
             ],
             [
                 'attribute' => 'perusahaan.NAMA',
