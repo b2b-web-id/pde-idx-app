@@ -14,14 +14,14 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
         '100' => [
             'id' => '100',
             'username' => 'admin',
-            'password' => 'admin',
+            'password' => '$2y$12$xhSbVDCVH75F8YnaKNdRCeNxIJp2zPLR8ZgU5tsye3VwAfi80Rc9G',
             'authKey' => 'test100key',
             'accessToken' => '100-token',
         ],
         '101' => [
             'id' => '101',
             'username' => 'demo',
-            'password' => 'demo',
+            'password' => '$2y$12$BZmZ/QiZBCnrI/KnUXjkAuXU8zg/otJWDTeLbNaau5s3yPFTXKWYS',
             'authKey' => 'test101key',
             'accessToken' => '101-token',
         ],
@@ -99,6 +99,6 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
      */
     public function validatePassword($password)
     {
-        return $this->password === $password;
+        return Yii::$app->security->validatePassword($password, $this->password);
     }
 }
