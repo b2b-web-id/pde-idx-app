@@ -67,13 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     // For filtering, it directly uses the value.
                     return $model->jabatan_ref ? $model->getJabatanRefLabel($model->jabatan_ref) : '-';
                 },
-                'filter' => [
-                    IndividuPerusahaan::JABATAN_REF_SEKRETARIS_PERUSAHAAN => 'Sekretaris Perusahaan',
-                    IndividuPerusahaan::JABATAN_REF_DIREKSI => 'Direksi',
-                    IndividuPerusahaan::JABATAN_REF_KOMISARIS => 'Komisaris',
-                    IndividuPerusahaan::JABATAN_REF_KOMITE_AUDIT => 'Komite Audit',
-                    IndividuPerusahaan::JABATAN_REF_LAINNYA => 'Lainnya',
-                ],
+                'filter' => IndividuPerusahaan::getJabatanOptions(),
             ],
             [
                 'attribute' => 'independen',
