@@ -32,5 +32,8 @@ tests/_support/_generated
 #vagrant folder
 /.vagrant
 
+# environment & local config
+.env
 config/db.php
+
 runtime/*
