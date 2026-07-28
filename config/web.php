@@ -15,7 +15,9 @@ $config = [
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => 'iUENEH4k2bOru_eYAFsl39O0CpSbxQ5W',
+            'cookieValidationKey' => getenv('COOKIE_VALIDATION_KEY') ?: 'iUENEH4k2bOru_eYAFsl39O0CpSbxQ5W',
+            'enableCsrfValidation' => !YII_ENV_TEST,
+            'enableCsrfCookie' => true,
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -23,6 +25,7 @@ $config = [
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
+            'loginUrl' => ['site/login'],
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -48,7 +51,28 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'individu-perusahaan' => 'individu-perusahaan/index',
+                'individu-perusahaan/create' => 'individu-perusahaan/create',
+                'individu-perusahaan/<id:\d+>' => 'individu-perusahaan/view',
+                'individu-perusahaan/<id:\d+>/update' => 'individu-perusahaan/update',
+                'individu-perusahaan/<id:\d+>/delete' => 'individu-perusahaan/delete',
+                'register' => 'site/register',
             ],
+        ],
+        'response' => [
+            'class' => 'yii\web\Response',
+            'on beforeSend' => function ($event) {
+                $response = $event->sender;
+                // Security headers
+                $response->headers->set('X-Frame-Options', 'DENY');
+                $response->headers->set('X-Content-Type-Options', 'nosniff');
+                $response->headers->set('X-XSS-Protection', '1; mode=block');
+                $response->headers->set('Referrer-Policy', 'strict-origin-when-cross-origin');
+                if (!YII_DEBUG) {
+                    $response->headers->set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+                    $response->headers->set('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;");
+                }
+            },
         ],
     ],
     'params' => $params,

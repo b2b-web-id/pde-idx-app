@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Individu;
-use yii\data\ActiveDataProvider;
+use app\models\IndividuSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -21,37 +21,46 @@ class IndividuController extends Controller
     public function behaviors()
     {
         return [
-          'access' => [
-              'class' => AccessControl::className(),
-              'only' => ['update', 'delete', 'create'],
-              'rules' => [
-                [
-                  'actions' => ['update', 'delete', 'create'],
-                  'allow' => true,
-                  'roles' => ['@'],
-                ]
-              ]
-          ],
-          'verbs' => [
-            'class' => VerbFilter::className(),
-            'actions' => [
-              'delete' => ['POST'],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['index', 'view'],
+                        'allow' => true,
+                        'roles' => ['@', '?'], // public & authenticated
+                    ],
+                    [
+                        'actions' => ['create', 'update', 'delete'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            // Admin only for create, update, delete
+                            return Yii::$app->user->identity && 
+                                Yii::$app->user->identity->role === 'admin';
+                        },
+                    ],
+                ],
             ],
-          ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
+                ],
+            ],
         ];
     }
 
     /**
-     * Lists all Individu models.
+     * Lists all Individu models with search capability.
      * @return mixed
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Individu::find(),
-        ]);
+        $searchModel = new IndividuSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }

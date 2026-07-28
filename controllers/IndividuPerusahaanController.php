@@ -3,17 +3,17 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Perusahaan;
-use app\models\PerusahaanSearch;
+use app\models\IndividuPerusahaan;
+use app\models\IndividuPerusahaanSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
 /**
- * PerusahaanController implements the CRUD actions for Perusahaan model.
+ * IndividuPerusahaanController implements the CRUD actions for IndividuPerusahaan model.
  */
-class PerusahaanController extends Controller
+class IndividuPerusahaanController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -27,14 +27,13 @@ class PerusahaanController extends Controller
                     [
                         'actions' => ['index', 'view'],
                         'allow' => true,
-                        'roles' => ['@', '?'], // public & authenticated
+                        'roles' => ['@', '?'],
                     ],
                     [
-                        'actions' => ['create', 'update', 'delete'],
+                        'actions' => ['create', 'update', 'delete', 'link-individu', 'link-perusahaan'],
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
-                            // Admin only for create, update, delete
                             return Yii::$app->user->identity && 
                                 Yii::$app->user->identity->role === 'admin';
                         },
@@ -51,12 +50,12 @@ class PerusahaanController extends Controller
     }
 
     /**
-     * Lists all Perusahaan models with search capability.
+     * Lists all IndividuPerusahaan models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new PerusahaanSearch();
+        $searchModel = new IndividuPerusahaanSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -66,7 +65,7 @@ class PerusahaanController extends Controller
     }
 
     /**
-     * Displays a single Perusahaan model.
+     * Displays a single IndividuPerusahaan model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -79,13 +78,12 @@ class PerusahaanController extends Controller
     }
 
     /**
-     * Creates a new Perusahaan model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
+     * Creates a new IndividuPerusahaan model.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Perusahaan();
+        $model = new IndividuPerusahaan();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->ID]);
@@ -97,8 +95,7 @@ class PerusahaanController extends Controller
     }
 
     /**
-     * Updates an existing Perusahaan model.
-     * If update is successful, the browser will be redirected to the 'view' page.
+     * Updates an existing IndividuPerusahaan model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -117,8 +114,7 @@ class PerusahaanController extends Controller
     }
 
     /**
-     * Deletes an existing Perusahaan model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * Deletes an existing IndividuPerusahaan model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -131,15 +127,14 @@ class PerusahaanController extends Controller
     }
 
     /**
-     * Finds the Perusahaan model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
+     * Finds the IndividuPerusahaan model based on its primary key value.
      * @param integer $id
-     * @return Perusahaan the loaded model
+     * @return IndividuPerusahaan the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Perusahaan::findOne($id)) !== null) {
+        if (($model = IndividuPerusahaan::findOne($id)) !== null) {
             return $model;
         }
 

@@ -24,8 +24,8 @@ $this->title = Yii::$app->name;
             </div>
             <div class="col-lg-4">
                 <h2>Hubungan</h2>
-                <p>Belum diterapkan.</p>
-                <p><a class="btn btn-default" href="#">Klik</a></p>
+                <p>Hubungan antara Individu dan Perusahaan (jabatan, periode, status).</p>
+                <p><a class="btn btn-default" href="individu-perusahaan/">Klik</a></p>
             </div>
         </div>
     </div>

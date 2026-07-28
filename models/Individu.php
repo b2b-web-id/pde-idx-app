@@ -45,23 +45,26 @@ class Individu extends \yii\db\ActiveRecord
         ];
     }
 
+    // ... di bagian bawah file, sebelum penutup tag PHP
+
     /**
-     * {@inheritdoc}
+     * Gets query for [[IndividuPerusahaan|individuPerusahaans]] relation.
+     *
+     * @return \yii\db\ActiveQuery
      */
-    public function attributeLabels()
+    public function getIndividuPerusahaans()
     {
-        return [
-            'ID' => 'ID',
-            'NAMA' => 'Nama',
-            'ALAMAT' => 'Alamat',
-            'EMAIL' => 'Email',
-            'TELEPON' => 'Telepon',
-            'HP' => 'Hp',
-            'FAKS' => 'Faks',
-            'SITUS' => 'Situs',
-            'TANGGAL_LAHIR' => 'Tanggal Lahir',
-            'TEMPAT_LAHIR' => 'Tempat Lahir',
-            'TANGGAL_UPDATE' => 'Tanggal Update',
-        ];
+        return $this->hasMany(IndividuPerusahaan::className(), ['INDIVIDU_ID' => 'ID']);
+    }
+
+    /**
+     * Gets query for [[Perusahaan|perusahaans]] relation via IndividuPerusahaan.
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPerusahaans()
+    {
+        return $this->hasMany(Perusahaan::className(), ['ID' => 'PERUSAHAAN_ID'])
+            ->via('individuPerusahaans');
     }
 }

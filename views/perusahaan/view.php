@@ -15,15 +15,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-<?php
-if(!Yii::$app->user->isGuest) {
-?>
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->ID], ['class' => 'btn btn-primary']) ?>
     </p>
-<?php
-}
-?>
+
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -37,8 +32,37 @@ if(!Yii::$app->user->isGuest) {
             'SITUS',
             'TANGGAL_AKTA',
             'USAHA_UTAMA',
-            'SEKTOR',
-            'KODE_KBLI',
+            [
+                'attribute' => 'sektor_id',
+                'label' => 'Sektor',
+                'value' => $model->sektor ? $model->sektor->nama : ($model->SEKTOR ?: '-'),
+            ],
+            [
+                'attribute' => 'kbli_id',
+                'label' => 'KBLI',
+                'value' => $model->kbli ? $model->kbli->kode . ' - ' . $model->kbli->nama : ($model->KODE_KBLI ?: '-'),
+            ],
+            [
+                'attribute' => 'papan_pencatatan',
+                'label' => 'Papan Pencatatan',
+                'value' => $model->papan_pencatatan ?: '-',
+            ],
+            [
+                'attribute' => 'tanggal_pencatatan',
+                'label' => 'Tanggal Pencatatan',
+                'format' => ['date', 'php:Y-m-d'],
+                'value' => $model->tanggal_pencatatan ?: null,
+            ],
+            [
+                'attribute' => 'idx_klasifikasi_id',
+                'label' => 'Subsektor / Industri / Subindustri',
+                'value' => $model->idxKlasifikasi ? $model->idxKlasifikasi->getFullPath() : '-',
+            ],
+            [
+                'attribute' => 'biro_admin_efek_id',
+                'label' => 'Biro Administrasi Efek',
+                'value' => $model->biroAdminEfek ? $model->biroAdminEfek->kode . ' - ' . $model->biroAdminEfek->nama : '-',
+            ],
             'TANGGAL_REKAM',
         ],
     ]) ?>
