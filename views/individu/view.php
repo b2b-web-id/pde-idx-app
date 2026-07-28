@@ -28,7 +28,6 @@ if(!Yii::$app->user->isGuest) {
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            //'ID',
             'NAMA',
             'ALAMAT',
             'EMAIL:email',

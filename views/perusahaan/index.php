@@ -28,20 +28,12 @@ if(!Yii::$app->user->isGuest) {
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            //'ID',
             'NAMA',
-            //'IDX_KODE',
             'ALAMAT',
-            //'EMAIL:email',
             'TELEPON',
-            //'FAKS',
-            //'NPWP',
             'SITUS',
-            //'TANGGAL_AKTA',
             'USAHA_UTAMA',
             'SEKTOR',
-            //'KODE_KBLI',
-            //'TANGGAL_REKAM',
 
             Yii::$app->user->isGuest ? (
               [

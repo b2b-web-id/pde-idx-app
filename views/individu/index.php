@@ -28,17 +28,11 @@ if(!Yii::$app->user->isGuest) {
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            //'ID',
             'NAMA',
             'ALAMAT',
             'EMAIL:email',
             'TELEPON',
-            //'HP',
-            //'FAKS',
             'SITUS',
-            //'TANGGAL_LAHIR',
-            //'TEMPAT_LAHIR',
-            //'TANGGAL_UPDATE',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
