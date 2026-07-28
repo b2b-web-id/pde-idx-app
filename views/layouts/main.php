@@ -43,6 +43,8 @@ AppAsset::register($this);
             ['label' => 'Individu', 'url' => ['/individu']],
             Yii::$app->user->identity && Yii::$app->user->identity->isAdmin() ? 
                 ['label' => 'Relationships', 'url' => ['/individu-perusahaan']] : '',
+            Yii::$app->user->identity && Yii::$app->user->identity->isAdmin() ?
+                ['label' => 'Ownership', 'url' => ['/kepemilikan-perusahaan']] : '',
             Yii::$app->user->isGuest ? (
                 ['label' => 'Register', 'url' => ['/site/register']]
             ) : '',

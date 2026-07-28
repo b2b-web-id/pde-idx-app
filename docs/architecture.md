@@ -60,7 +60,13 @@ Unique index pada pasangan individu/perusahaan mencegah duplikasi relasi. Foreig
 
 `Sektor`, `Kbli`, `IdxKlasifikasi`, dan `BiroAdminEfek` menyediakan data referensi untuk `Perusahaan`. Migration `m240101000005` sampai `m240101000007` membuat hierarchy dan seed data awal.
 
-### 4.3 Pengguna
+### 4.3 Kepemilikan Perusahaan
+
+`KepemilikanPerusahaan` adalah edge berarah dari `pemilik_id` ke `perusahaan_id`. Karena fase ini menetapkan entitas sebagai `Perusahaan`, pemegang saham yang dapat direferensikan adalah perusahaan lain.
+
+Anak perusahaan tidak dibuat sebagai tabel terpisah. Ia ditampilkan dari relasi ketika perusahaan menjadi `pemilik_id`. Setiap record menyimpan snapshot `tanggal_data`, `sumber_data`, persentase kepemilikan/hak suara, periode berlaku, dan referensi sumber. Unique key snapshot mencegah duplikasi tanpa menghapus histori.
+
+### 4.4 Pengguna
 
 `User` adalah ActiveRecord dan implementasi `IdentityInterface`. Password disimpan sebagai hash. User baru dari registrasi selalu mendapat role `user`; akun admin dibuat melalui `php yii seed` atau proses administrasi terkontrol.
 
@@ -74,6 +80,7 @@ Pretty URL diatur di `config/web.php`.
 | `/individu` | `IndividuController` | Index/view publik; mutasi admin |
 | `/perusahaan` | `PerusahaanController` | Index/view publik; mutasi admin |
 | `/individu-perusahaan` | `IndividuPerusahaanController` | Index/view publik; mutasi admin |
+| `/kepemilikan-perusahaan` | `KepemilikanPerusahaanController` | Index/view publik; mutasi admin |
 | `/register` | `SiteController::actionRegister` | Guest |
 
 `AccessControl` membatasi operasi mutasi. `VerbFilter` membatasi delete ke HTTP POST.

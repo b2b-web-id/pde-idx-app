@@ -10,6 +10,7 @@ Target: aplikasi dapat di-install, di-migrate, dan diuji ulang secara konsisten.
 - Tambahkan fixture dan unit test untuk `User`, `RegisterForm`, `LoginForm`, dan `IndividuPerusahaan`.
 - Tambahkan functional test untuk guest, user biasa, dan admin.
 - Validasi foreign key, unique constraint, timezone, dan format tanggal.
+- Tambahkan fixture dan test untuk snapshot kepemilikan, termasuk self-link, duplikasi snapshot, dan histori tanggal.
 - Pisahkan konfigurasi development/test/production secara eksplisit.
 - Naikkan constraint PHP di `composer.json` agar sesuai runtime yang benar-benar didukung, setelah kompatibilitas diverifikasi.
 
@@ -50,6 +51,8 @@ Target: pengguna dapat menemukan, memeriksa, dan mengekspor data secara efisien.
 - Tambahkan export CSV/XLSX dengan permission dan batas ukuran.
 - Tambahkan halaman detail perusahaan yang merangkum individu, jabatan, klasifikasi, dan histori.
 - Tambahkan validasi konflik periode jabatan dan duplikasi entitas.
+- Tambahkan ownership tree dari `KepemilikanPerusahaan`, termasuk perhitungan kepemilikan tidak langsung.
+- Tambahkan UI CRUD snapshot kepemilikan yang sudah tersedia ke halaman detail perusahaan.
 - Tambahkan API read-only bila integrasi eksternal memang diperlukan.
 
 Definition of done: workflow pencarian dan review data dapat diselesaikan tanpa akses langsung ke database.

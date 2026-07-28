@@ -9,6 +9,7 @@ Fitur yang tersedia:
 - CRUD dan pencarian data `Individu`.
 - CRUD dan pencarian data `Perusahaan`.
 - Relasi `Individu` <-> `Perusahaan`, termasuk jabatan, status, periode, dan penanda komisaris independen.
+- Snapshot kepemilikan perusahaan-ke-perusahaan untuk merepresentasikan pemegang saham dan anak perusahaan.
 - Referensi sektor, KBLI, klasifikasi IDX, dan biro administrasi efek.
 - Login berbasis database, registrasi user, bcrypt password hashing, dan role `admin`/`user`.
 - Akses CRUD relasi dan data utama dibatasi untuk administrator.
@@ -75,6 +76,7 @@ Migration membuat atau memperluas tabel berikut:
 - `individu`, `perusahaan`, dan `individu_perusahaan`.
 - `sektor`, `kbli`, dan `idx_klasifikasi`.
 - `biro_admin_efek` serta kolom referensi IDX pada `perusahaan`.
+- `kepemilikan_perusahaan` untuk hubungan pemilik-target dan histori snapshot.
 
 Perintah yang umum digunakan:
 
