@@ -72,4 +72,10 @@ class Individu extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Entitas::className(), ['individu_id' => 'ID']);
     }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+        Entitas::syncFromIndividu($this);
+    }
 }

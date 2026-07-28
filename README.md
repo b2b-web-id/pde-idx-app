@@ -50,6 +50,7 @@ export DB_PASSWORD=''
 
 php yii migrate --interactive=0
 php yii seed
+php yii entitas/sync
 php -S localhost:8000 -t web
 ```
 
@@ -77,6 +78,8 @@ Migration membuat atau memperluas tabel berikut:
 - `sektor`, `kbli`, dan `idx_klasifikasi`.
 - `biro_admin_efek` serta kolom referensi IDX pada `perusahaan`.
 - `entitas` dan `kepemilikan_perusahaan` untuk pemegang saham individu, perusahaan, kelompok publik, treasury, serta histori snapshot.
+
+Saat `Individu` atau `Perusahaan` disimpan melalui ActiveRecord, record canonical `entitas` dibuat atau diperbarui otomatis. Jalankan `php yii entitas/sync` setelah import yang menulis langsung ke database.
 
 Perintah yang umum digunakan:
 

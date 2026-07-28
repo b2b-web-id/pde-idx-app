@@ -35,6 +35,7 @@ Target: data IDX dapat dimuat ulang secara aman dan berulang.
 
 - Tetapkan format import resmi, mapping kolom, encoding, dan aturan normalisasi.
 - Buat console command import dengan dry-run dan laporan error per baris.
+- Pastikan pipeline import memanggil sinkronisasi `Entitas` atau menggunakan service yang sama dengan ActiveRecord.
 - Gunakan staging table sebelum merge ke tabel master.
 - Tambahkan idempotency key atau natural key untuk mencegah duplikasi.
 - Simpan batch import, checksum sumber, waktu import, dan jumlah record berhasil/gagal.

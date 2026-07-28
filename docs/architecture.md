@@ -70,6 +70,8 @@ Anak perusahaan tidak dibuat sebagai tabel terpisah. Ia ditampilkan dari relasi 
 
 `User` adalah ActiveRecord dan implementasi `IdentityInterface`. Password disimpan sebagai hash. User baru dari registrasi selalu mendapat role `user`; akun admin dibuat melalui `php yii seed` atau proses administrasi terkontrol.
 
+Saat `Individu` atau `Perusahaan` disimpan melalui ActiveRecord, hook `afterSave` memanggil sinkronisasi canonical `Entitas`. Import yang menggunakan SQL langsung harus diikuti `php yii entitas/sync`.
+
 ## 5. Routing dan Controller
 
 Pretty URL diatur di `config/web.php`.

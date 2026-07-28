@@ -65,6 +65,37 @@ class Entitas extends ActiveRecord
         return static::find()->orderBy(['nama_display' => SORT_ASC])->all();
     }
 
+    public static function syncFromIndividu(Individu $individu)
+    {
+        return self::syncCanonical(
+            self::TIPE_INDIVIDU,
+            $individu->NAMA,
+            ['individu_id' => $individu->ID, 'perusahaan_id' => null]
+        );
+    }
+
+    public static function syncFromPerusahaan(Perusahaan $perusahaan)
+    {
+        return self::syncCanonical(
+            self::TIPE_PERUSAHAAN,
+            $perusahaan->NAMA,
+            ['perusahaan_id' => $perusahaan->ID, 'individu_id' => null]
+        );
+    }
+
+    private static function syncCanonical($tipe, $nama, array $keys)
+    {
+        $entity = self::findOne($keys);
+        if ($entity === null) {
+            $entity = new self();
+            $entity->setAttributes($keys);
+        }
+
+        $entity->tipe = $tipe;
+        $entity->nama_display = $nama;
+        return $entity->save(false) ? $entity : null;
+    }
+
     public function getDisplayName()
     {
         return $this->nama_display;

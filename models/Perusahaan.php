@@ -138,6 +138,12 @@ class Perusahaan extends \yii\db\ActiveRecord
         return $this->hasOne(Entitas::className(), ['perusahaan_id' => 'ID']);
     }
 
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+        Entitas::syncFromPerusahaan($this);
+    }
+
     /**
      * Ownership records where this company is the owned target.
      */
