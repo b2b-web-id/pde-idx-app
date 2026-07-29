@@ -26,14 +26,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             [
-                'attribute' => 'pemilikEntitas.nama_display',
+                'attribute' => 'pemilikNama',
                 'label' => 'Pemegang Saham',
                 'value' => function ($model) { return $model->pemilikEntitas ? $model->pemilikEntitas->nama_display : '-'; },
+                'filter' => Html::activeTextInput($searchModel, 'pemilikNama', ['class' => 'form-control', 'placeholder' => 'Cari pemegang saham...']),
             ],
             [
-                'attribute' => 'perusahaan.NAMA',
+                'attribute' => 'targetNama',
                 'label' => 'Perusahaan Target',
                 'value' => function ($model) { return $model->perusahaan ? $model->perusahaan->NAMA : '-'; },
+                'filter' => Html::activeTextInput($searchModel, 'targetNama', ['class' => 'form-control', 'placeholder' => 'Cari perusahaan target...']),
             ],
             'persentase_kepemilikan:decimal',
             [

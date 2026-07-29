@@ -30,18 +30,20 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             [
-                'attribute' => 'individu.NAMA',
+                'attribute' => 'individuNama',
                 'label' => 'Individu',
                 'value' => function ($model) {
                     return $model->individu ? $model->individu->NAMA : '-';
                 },
+                'filter' => Html::activeTextInput($searchModel, 'individuNama', ['class' => 'form-control', 'placeholder' => 'Cari individu...']),
             ],
             [
-                'attribute' => 'perusahaan.NAMA',
+                'attribute' => 'perusahaanNama',
                 'label' => 'Perusahaan',
                 'value' => function ($model) {
                     return $model->perusahaan ? $model->perusahaan->NAMA : '-';
                 },
+                'filter' => Html::activeTextInput($searchModel, 'perusahaanNama', ['class' => 'form-control', 'placeholder' => 'Cari perusahaan...']),
             ],
             [
                 'attribute' => 'JABATAN',
@@ -56,15 +58,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     'WAKIL DIREKTUR UTAMA' => 'WAKIL DIREKTUR UTAMA',
                     'DIREKTUR' => 'DIREKTUR',
                     'SEKRETARIS PERUSAHAAN' => 'SEKRETARIS PERUSAHAAN',
-                    'Lainnya' => 'Lainnya', // Added 'Lainnya' for general cases
+                    'Lainnya' => 'Lainnya',
                 ],
             ],
             [
                 'attribute' => 'jabatan_ref',
                 'label' => 'Jabatan Ref',
                 'value' => function ($model) {
-                    // Use a mapping for display if needed, otherwise direct value from model
-                    // For filtering, it directly uses the value.
                     return $model->jabatan_ref ? $model->getJabatanRefLabel($model->jabatan_ref) : '-';
                 },
                 'filter' => IndividuPerusahaan::getJabatanOptions(),

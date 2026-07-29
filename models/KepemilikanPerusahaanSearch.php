@@ -6,12 +6,14 @@ use yii\data\ActiveDataProvider;
 
 class KepemilikanPerusahaanSearch extends KepemilikanPerusahaan
 {
+    public $pemilikNama;
+    public $targetNama;
     public function rules()
     {
         return [
             [['id', 'pemilik_entitas_id', 'perusahaan_id', 'jumlah_saham'], 'integer'],
             [['persentase_kepemilikan', 'persentase_hak_suara'], 'number'],
-            [['jenis_kepemilikan', 'status_kontrol', 'sumber_data', 'tanggal_data'], 'safe'],
+            [['jenis_kepemilikan', 'status_kontrol', 'sumber_data', 'tanggal_data', 'pemilikNama', 'targetNama'], 'safe'],
         ];
     }
 
@@ -42,6 +44,15 @@ class KepemilikanPerusahaanSearch extends KepemilikanPerusahaan
         $this->load($params);
         if (!$this->validate()) {
             return $dataProvider;
+        }
+
+        if (!empty($this->pemilikNama)) {
+            $value = trim($this->pemilikNama);
+            $query->andWhere(['like', 'entitas.nama_display', $value]);
+        }
+        if (!empty($this->targetNama)) {
+            $value = trim($this->targetNama);
+            $query->andWhere(['like', 'perusahaan.NAMA', $value]);
         }
 
         $query->andFilterWhere([
